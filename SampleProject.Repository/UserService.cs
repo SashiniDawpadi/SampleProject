@@ -30,7 +30,7 @@ namespace SampleProject.Repository
 
                     para.Add("@UserName", UserName);
                     para.Add("@NICNo", NICNo);
-                    var results = await connection.QueryAsync<User>("[wal].[SelectUserDummy]", para, commandType: CommandType.StoredProcedure);
+                    var results = await connection.QueryAsync<User>("[SelectUserDummy]", para, commandType: CommandType.StoredProcedure);
 
                     return new BaseResponseService().GetSuccessResponse(results);
                 }

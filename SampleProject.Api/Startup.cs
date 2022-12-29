@@ -45,6 +45,7 @@ namespace SampleProject.Api
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddCors();
             services.AddTransient<IUserRepository>(c => new UserService(_connectionString));
+            services.AddTransient<IStudentRepository>(c => new StudentService(_connectionString));
             //To use app.UseMvc() we need this code part. 
             services.AddMvc(options=>options.EnableEndpointRouting = false);
         }
