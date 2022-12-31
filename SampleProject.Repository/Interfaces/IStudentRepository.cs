@@ -1,4 +1,5 @@
 ﻿using SampleProject.Model;
+using System;
 using System.Threading.Tasks;
 
 namespace SampleProject.Repository.Interfaces
@@ -8,6 +9,8 @@ namespace SampleProject.Repository.Interfaces
         Task<BaseResponse> SelectById(string StudentId);
 
         Task<BaseResponse> SelectAllStudents();
+
+        Task<BaseResponse> DeleteStudent(string StudentId);
 
     }
 }

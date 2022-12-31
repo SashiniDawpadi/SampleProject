@@ -2,6 +2,8 @@ using System.Threading.Tasks;
 using SampleProject.Repository.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using System.Runtime.Versioning;
+using System;
 
 namespace SampleProject.Api.Controllers
 {
@@ -53,5 +55,23 @@ namespace SampleProject.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, response);
             }
         }
+
+        [HttpDelete("DeleteStudent")]
+        public async Task<ActionResult> DeleteStudent(string StudentId)
+        {
+           
+            var response = await _repository.DeleteStudent(StudentId);
+     
+
+            if (response.Success)
+            {
+                return Ok(response);
+            }
+            else
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, response);
+            }
+        }
+
     }
 }

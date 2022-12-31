@@ -4,7 +4,9 @@ using SampleProject.Repository.Interfaces;
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Net;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace SampleProject.Repository
 {
@@ -60,5 +62,33 @@ namespace SampleProject.Repository
                 return new BaseResponseService().GetErrorResponse(ex);
             }
         }
+
+        public async Task<BaseResponse> DeleteStudent(string StudentId)
+        {
+            try
+            {
+                using (var connection = new SqlConnection(_connectionString))
+                {
+                    DynamicParameters para = new DynamicParameters();
+                    para.Add("@SId", StudentId);
+                   
+
+                    var results = await connection.QueryAsync<Student>("DeleteStudentSP", para, commandType: CommandType.StoredProcedure);
+                    return new BaseResponseService().GetSuccessResponse(results);
+                }
+            }
+            catch (SqlException ex)
+            {
+                return new BaseResponseService().GetErrorResponse(ex);
+            }
+            catch (Exception ex)
+            {
+                return new BaseResponseService().GetErrorResponse(ex);
+            }
+        }
+
+
+
+
     }
 }
