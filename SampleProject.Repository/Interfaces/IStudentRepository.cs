@@ -12,5 +12,10 @@ namespace SampleProject.Repository.Interfaces
 
         Task<BaseResponse> DeleteStudent(string StudentId);
 
+        Task<BaseResponse> AddStudent(Student student);
+
+        Task<BaseResponse> UpdateStudent(string studentId,Student studentDetails);
+
+
     }
 }

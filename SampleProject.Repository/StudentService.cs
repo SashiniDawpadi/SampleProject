@@ -87,6 +87,66 @@ namespace SampleProject.Repository
             }
         }
 
+        public async Task<BaseResponse> AddStudent(Student student)
+        {
+            try
+            {
+                using (var connection = new SqlConnection(_connectionString))
+                {
+                    DynamicParameters para = new DynamicParameters();
+                    para.Add("@SId", student.StudentId);
+                    para.Add("@fName", student.fName);
+                    para.Add("@lName", student.lName);
+                    para.Add("@DOB", student.DOB);
+                    para.Add("@Address", student.Address);
+
+                    
+
+                    var results = await connection.QueryAsync<Student>("AddStudentSP", para, commandType: CommandType.StoredProcedure);
+                    Console.WriteLine("\n" + results + "\n");
+                    return new BaseResponseService().GetSuccessResponse(results);
+                }
+            }
+            catch (SqlException ex)
+            {
+                return new BaseResponseService().GetErrorResponse(ex);
+            }
+            catch (Exception ex)
+            {
+                return new BaseResponseService().GetErrorResponse(ex);
+            }
+        }
+
+
+        public async Task<BaseResponse> UpdateStudent(string studentId , Student studentDetails)
+        {
+            try
+            {
+                using (var connection = new SqlConnection(_connectionString))
+                {
+                    DynamicParameters para = new DynamicParameters();
+                    para.Add("@SId", studentId);
+                    para.Add("@fName", studentDetails.fName);
+                    para.Add("@lName", studentDetails.lName);
+                    para.Add("@DOB", studentDetails.DOB);
+                    para.Add("@Address", studentDetails.Address);
+
+
+
+                    var results = await connection.QueryAsync<Student>("UpdateStudentSP", para, commandType: CommandType.StoredProcedure);
+                    Console.WriteLine("\n" + results + "\n");
+                    return new BaseResponseService().GetSuccessResponse(results);
+                }
+            }
+            catch (SqlException ex)
+            {
+                return new BaseResponseService().GetErrorResponse(ex);
+            }
+            catch (Exception ex)
+            {
+                return new BaseResponseService().GetErrorResponse(ex);
+            }
+        }
 
 
 

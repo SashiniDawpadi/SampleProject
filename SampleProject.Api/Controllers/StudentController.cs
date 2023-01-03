@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using System.Runtime.Versioning;
 using System;
+using SampleProject.Model;
 
 namespace SampleProject.Api.Controllers
 {
@@ -72,6 +73,43 @@ namespace SampleProject.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, response);
             }
         }
+
+
+        [HttpPost("AddStudent")]
+        public async Task<ActionResult> AddStudent( [FromBody] Student student)
+        {
+
+            var response = await _repository.AddStudent(student);
+
+            if (response.Success)
+            {
+                return StatusCode(StatusCodes.Status201Created, response);
+            }
+            else
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, response);
+            }
+        }
+
+
+        [HttpPut("UpdateStudent")]
+        public async Task<ActionResult> UpdateStudent( string studentId , [FromBody] Student studentDeails)
+        {
+
+            var response = await _repository.UpdateStudent(studentId , studentDeails);
+
+            if (response.Success)
+            {
+                return Ok(response);
+            }
+            else
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, response);
+            }
+        }
+
+
+
 
     }
 }
