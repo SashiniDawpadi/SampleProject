@@ -76,8 +76,10 @@ namespace SampleProject.Api.Controllers
 
 
         [HttpPost("AddStudent")]
-        public async Task<ActionResult> AddStudent( [FromBody] Student student)
+        public async Task<ActionResult> AddStudent([FromBody] Student student)
         {
+           // Console.WriteLine("Hi");
+           // Console.WriteLine(student);
 
             var response = await _repository.AddStudent(student);
 

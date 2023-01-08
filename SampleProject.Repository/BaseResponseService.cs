@@ -34,12 +34,12 @@ namespace SampleProject.Repository
             ErrorResponse error = new ErrorResponse();
             error.Message = ex.Message;
 
-            if (ex.Number == 50005)
-            {
+          //  if (ex.Number == 50005)
+           // {
                 return new BaseResponse() { Success = false, Message = ex.Message, ErrorType = "VAL", Data = error, ExceptionNumber = ex.Number };
-            }
+           // }
 
-            return GetErrorResponse((Exception)ex);
+           // return GetErrorResponse((Exception)ex);
         }
 
         public BaseResponse GetErrorResponse(Exception ex)

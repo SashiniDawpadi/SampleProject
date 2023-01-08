@@ -28,7 +28,7 @@ namespace SampleProject.Repository
                     DynamicParameters para = new DynamicParameters();
 
                     para.Add("@SId", StudentId);
-                    var results =await connection.QueryAsync<Student>("SelectByIdSP", para, commandType: CommandType.StoredProcedure);
+                    var results =await connection.QueryAsync<Student>("SelectSP", para, commandType: CommandType.StoredProcedure);
                     return new BaseResponseService().GetSuccessResponse(results);
                 }
             }
@@ -93,11 +93,18 @@ namespace SampleProject.Repository
             {
                 using (var connection = new SqlConnection(_connectionString))
                 {
+                    Console.WriteLine(student.StudentId);
+                    Console.WriteLine(student.fName);
+                    Console.WriteLine(student.lName);
+                    Console.WriteLine(student.DateOfBirth);
+                    Console.WriteLine(student.Address);
+
+
                     DynamicParameters para = new DynamicParameters();
                     para.Add("@SId", student.StudentId);
                     para.Add("@fName", student.fName);
                     para.Add("@lName", student.lName);
-                    para.Add("@DOB", student.DOB);
+                    para.Add("@DateOfBirth", student.DateOfBirth);
                     para.Add("@Address", student.Address);
 
                     
@@ -128,7 +135,7 @@ namespace SampleProject.Repository
                     para.Add("@SId", studentId);
                     para.Add("@fName", studentDetails.fName);
                     para.Add("@lName", studentDetails.lName);
-                    para.Add("@DOB", studentDetails.DOB);
+                    para.Add("@DOB", studentDetails.DateOfBirth);
                     para.Add("@Address", studentDetails.Address);
 
 

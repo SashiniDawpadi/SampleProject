@@ -7,7 +7,7 @@ namespace SampleProject.Model
         public string StudentId { get; set; }
         public string fName { get; set; }
         public string lName { get; set; }
-        public DateTime DOB { get; set; }
+        public DateTime DateOfBirth { get; set; }
 
         public string Address { get; set; }
     }
